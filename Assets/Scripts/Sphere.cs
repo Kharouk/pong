@@ -8,7 +8,7 @@ public class Sphere : MonoBehaviour
 {
     
     public float bounciness = 1;
-    private Vector3 speed = new Vector3(500, 5, 0);
+    private Vector3 speed = new Vector3(300, 15);
     private Rigidbody ball_rb;
     
     private void StartRandom()
@@ -30,21 +30,21 @@ public class Sphere : MonoBehaviour
         ball_rb = GetComponent<Rigidbody>();
         StartRandom();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-         // speed.x = Mathf.Clamp(speed.x, 0, 20);
-         // ball_rb.AddForce(speed);
-    }
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
             Vector3 vel = new Vector3();
-            vel.x = ball_rb.velocity.x;
-            Debug.Log(vel);
+            var ballVelocity = ball_rb.velocity;
+            
+            var player = collision.collider.attachedRigidbody.velocity.y;
+
+            vel.x = ballVelocity.x * 1.1f; // Increases the speed of the ball velocity
+            vel.y = (ballVelocity.y * 1.1f) + (player /  3.0f);
+
+            ball_rb.velocity = vel;
+
         }
         Debug.Log(collision.collider.tag);
     }
