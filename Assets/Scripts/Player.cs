@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int speed = 1;
+    public int speed = 5;
     void Start()
     {
         Debug.Log("Hello Mess!");
