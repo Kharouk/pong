@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    public int speed = 1;
     void Start()
     {
-        Debug.Log("Hello Test!");
+        Debug.Log("Hello Mess!");
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        
+    { 
+        var velocity = speed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.UpArrow)) {
+            transform.Translate(Vector3.up * velocity);
+        } else if (Input.GetKey(KeyCode.DownArrow)) {
+            transform.Translate(Vector3.down * velocity);
+        }
     }
 }
